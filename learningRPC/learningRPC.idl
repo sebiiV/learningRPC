@@ -1,0 +1,10 @@
+import "oaidl.idl";
+import "ocidl.idl";
+[
+	uuid(d4866451-c006-4680-a2a7-a26e69c6d0aa),
+	version(1.0)
+]
+interface learningRPC {
+	// Take in a zero terminated string and echo it
+	void Echo([in, string] const char* szEcho);
+};
