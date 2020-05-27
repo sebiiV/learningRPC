@@ -140,6 +140,9 @@
   <ItemGroup>
     <Midl Include="learningRPC.idl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="learningRPC.acf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

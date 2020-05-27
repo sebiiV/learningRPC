@@ -6,5 +6,7 @@ import "ocidl.idl";
 ]
 interface learningRPC {
 	// Take in a zero terminated string and echo it
-	void Echo([in, string] const char* szEcho);
+	void Echo([in] handle_t h1,[in, string] unsigned char* pszString);
+	void Shutdown([in] handle_t h1);
 };
+

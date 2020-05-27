@@ -3,4 +3,7 @@
   <ItemGroup>
     <Midl Include="learningRPC.idl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="learningRPC.acf" />
+  </ItemGroup>
 </Project>
