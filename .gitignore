@@ -338,3 +338,10 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# custom ignores
+midl.exe
+
+learningRPC/learningRPC.h
+learningRPC/learningRPC_c.c
+learningRPC/learningRPC_s.c

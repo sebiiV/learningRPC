@@ -8,10 +8,16 @@
 void main()
 {
     RPC_STATUS status;
+    /*
+    Best practice: Use ncacn_ip_tcp when making a remote call.
+    Use ncalrpc for local calls. Do not use ncacn_np, ncacn_spx,
+    or any of the ncadg_* protocol sequences; they are less efficient 
+    and have inferior capabilities.
+    */
     unsigned char* pszUuid = NULL;
-    RPC_CSTR pszProtocolSequence = "ncacn_np";
+    RPC_CSTR pszProtocolSequence = "ncalrpc";
     RPC_CSTR pszNetworkAddress = NULL;
-    RPC_CSTR pszEndpoint = "\\pipe\\learningRPC";
+    RPC_CSTR pszEndpoint = "8765";
     RPC_CSTR pszOptions = NULL;
     RPC_CSTR pszStringBinding = NULL;
     RPC_CSTR pszString = "hello, world";
@@ -33,7 +39,8 @@ void main()
     RpcTryExcept
     {
         Echo(hLearningRPCbinding,pszString);
-        Shutdown(hLearningRPCbinding);
+        unsigned int response = Square(hLearningRPCbinding, 4);
+        printf_s("response from squared: %i\n", response);
     }
         RpcExcept(1)
     {
@@ -42,6 +49,7 @@ void main()
     }
     RpcEndExcept
 
+        Shutdown(hLearningRPCbinding);
         status = RpcStringFree(&pszStringBinding);
 
     if (status) exit(status);

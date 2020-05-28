@@ -18,6 +18,9 @@
     <ClInclude Include="..\learningRPC\learningRPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="spn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="server.c">
@@ -27,6 +30,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="proc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spn.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

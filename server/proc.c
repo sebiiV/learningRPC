@@ -7,6 +7,11 @@ void Echo(IN RPC_BINDING_HANDLE hBinding, unsigned char* pszString)
     printf_s("%s\n", pszString);
 }
 
+unsigned int Square(IN RPC_BINDING_HANDLE hBinding, unsigned int uNumber)
+{
+    return uNumber * uNumber;
+}
+
 void Shutdown(IN RPC_BINDING_HANDLE hBinding)
 {
     RPC_STATUS status;

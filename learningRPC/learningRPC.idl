@@ -6,7 +6,16 @@ import "ocidl.idl";
 ]
 interface learningRPC {
 	// Take in a zero terminated string and echo it
-	void Echo([in] handle_t h1,[in, string] unsigned char* pszString);
-	void Shutdown([in] handle_t h1);
+	void Echo(
+		[in] handle_t h1,
+		[in, string] unsigned char* pszString);
+
+	//take in an integer, and return the squared value
+	unsigned int Square(
+		[in] handle_t h1,
+		[in] unsigned int uNumber);
+
+	void Shutdown(
+		[in] handle_t h1);
 };
 
