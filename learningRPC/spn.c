@@ -31,9 +31,10 @@ LPTSTR makespn() {
     if (dwStatus != ERROR_SUCCESS)
     {
         free(lpzSpn);
-        return NULL;
+        exit(dwStatus);
     }
 
     return lpzSpn;
 
 }
+

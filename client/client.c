@@ -4,6 +4,8 @@
 #include <windows.h>
 #include "../learningRPC/learningRPC.h"
 
+#include "../learningRPC/spn.c"
+
 
 void main()
 {
@@ -29,10 +31,26 @@ void main()
         pszEndpoint,
         pszOptions,
         &pszStringBinding);
-
     if (status) exit(status);
 
     status = RpcBindingFromStringBindingA(pszStringBinding, &hLearningRPCbinding);
+    if (status) exit(status);
+
+    LPSTR lpzSpn = makespn();
+
+
+    //Regardless of the value specified by the constant, ncalrpc always uses RPC_C_AUTHN_LEVEL_PKT_PRIVACY.
+    //and also WINNT? 
+
+    status = RpcBindingSetAuthInfoExA(
+        hLearningRPCbinding,            //binding
+        lpzSpn,                         //spn
+        RPC_C_AUTHN_LEVEL_PKT_PRIVACY,  //authn level
+        RPC_C_AUTHN_WINNT,       //authn svc
+        NULL,                      //auth idendity, null means anonymous.
+        0,                       //authzsvc
+        0);                       //security qos
+
 
     if (status) exit(status);
 
@@ -41,15 +59,18 @@ void main()
         Echo(hLearningRPCbinding,pszString);
         unsigned int response = Square(hLearningRPCbinding, 4);
         printf_s("response from squared: %i\n", response);
+        Shutdown(hLearningRPCbinding);
     }
         RpcExcept(1)
     {
         ulCode = RpcExceptionCode();
         printf("Runtime reported exception 0x%lx = %ld\n", ulCode, ulCode);
+        if (ulCode == 5) {
+            printf_s("Access denied\n");
+        }
     }
     RpcEndExcept
 
-        Shutdown(hLearningRPCbinding);
         status = RpcStringFree(&pszStringBinding);
 
     if (status) exit(status);

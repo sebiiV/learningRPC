@@ -6,4 +6,14 @@
   <ItemGroup>
     <Text Include="learningRPC.acf" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{00b10901-1c03-4d2c-9678-4a678c17c35e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="spn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

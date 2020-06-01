@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "../learningRPC/learningRPC.h"
 
-#include "spn.h"
+#include "../learningRPC/spn.c"
 
 
 /******************************************************/
@@ -12,6 +12,30 @@
 /******************************************************/
 RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE hInterface, void* pBindinghandle)
 {
+    printf_s("Client connected\n");
+
+    RPC_STATUS status;
+    unsigned long ulAuthnLevel;
+    unsigned long ulAuthnSvc;
+
+    status = RpcBindingInqAuthClient(pBindinghandle,
+        NULL,
+        NULL,
+        &ulAuthnLevel,
+        &ulAuthnSvc,
+        NULL);
+
+    if (status) {
+        printf_s("Client Inq failed");
+        return RPC_S_ACCESS_DENIED;
+    };
+
+    if (ulAuthnLevel != RPC_C_AUTHN_LEVEL_PKT_PRIVACY || ulAuthnSvc != RPC_C_AUTHN_WINNT) {
+
+        return RPC_S_ACCESS_DENIED;
+    }
+
+    printf_s("Client authneticated successfully");
     return RPC_S_OK;
 }
 
@@ -32,7 +56,6 @@ void main()
 
     //create a Service principal name
     LPSTR lpzSpn = makespn();
-    if (lpzSpn==NULL) exit(1);
 
     //register it
     status = RpcServerRegisterAuthInfo(

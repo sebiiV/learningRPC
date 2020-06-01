@@ -140,13 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\learningRPC\learningRPC.h" />
-    <ClInclude Include="spn.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\learningRPC\learningRPC_s.c" />
     <ClCompile Include="proc.c" />
     <ClCompile Include="server.c" />
-    <ClCompile Include="spn.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
